@@ -34,11 +34,11 @@ class AppController{
     }
 
     start(){
-        this.divResults.innerHTML = "";
+        //this.divResults.innerHTML = "";
         this.captureController.captures = [];
         this.textInstruction.innerHTML = this.texts[0];
         this.captureController.isCaptured = true;
-        this.isShowCenterFace = true;
+        //this.isShowCenterFace = true;
     }
 
     setShowLandmarksPoints(){
@@ -57,10 +57,29 @@ class AppController{
           this.buttonShowNottinghamPoints.innerHTML = "Mostrar Pontos de Nottingham";
     }
 
+    verifyCenter(){
+        var contorno = document.getElementById("contorno-img");
+        var button = document.getElementById("button-start-capture");
+        var posXDir = this.face.getXbyId(234);
+        var posXEsq = this.face.getXbyId(454);
+        console.log(posXEsq);
+        if(posXDir > 120 && posXDir < 220 && posXEsq > 480 && posXEsq < 560 ){
+            contorno.src = "views/assets/images/contorno-verde.png";
+            button.style.backgroundColor = "#780FA9";
+            button.disabled = "";
+            
+        } else{
+            contorno.src = "views/assets/images/contorno-vermelho.png";
+            button.style.backgroundColor = "#777877";
+            button.disabled = "disabled";
+        }
+
+    }
     
     onResults(results) {
         this.canvasCtx.save();
         this.flip();
+        this.verifyCenter();
 
         this.canvasCtx.clearRect(0, 0, this.C, this.canvasElement.height);
         this.canvasCtx.drawImage(results.image, 0, 0, this.canvasElement.width, this.canvasElement.height);
@@ -70,7 +89,7 @@ class AppController{
             for (const landmarks of results.multiFaceLandmarks) {
                 
                 this.face.setLandmarks(landmarks, this.width, this.height);   
-                this.showCenterFace(results.image);            
+                //this.showCenterFace(results.image);            
                 this.showLandmarksPoints(this.face.landmarks);
                 this.getNottinghamPositions(this.face);
                 this.showNottinghamPoints(this.face);  
@@ -108,23 +127,23 @@ class AppController{
             }
     }
 
-    showCenterFace(canvas){
-        if(this.isShowCenterFace){
-            if(this.isCenterFace)
-                this.canvasCtx.fillStyle = 'rgba(0,120,0,0.5)';
-            else
-                this.canvasCtx.fillStyle = 'rgba(0,0,120,0.5)';
-                this.canvasCtx.scale(1,1);
-                this.canvasCtx.fillRect(0,0, this.canvasElement.width, this.canvasElement.height);
-                this.canvasCtx.ellipse(this.canvasElement.width / 2, this.canvasElement.height / 2, 230, 300, 0, 0, Math.PI*2);
-                //this.canvasCtx.arc(this.canvasElement.width / 2, this.canvasElement.height / 2, 300, 0, Math.PI * 2, true);
-                this.canvasCtx.clip();
-                this.canvasCtx.scale(1,1);
-                this.canvasCtx.drawImage(canvas, 0, 0, this.canvasElement.width, this.canvasElement.height);
+    // showCenterFace(canvas){
+    //     if(this.isShowCenterFace){
+    //         if(this.isCenterFace)
+    //             this.canvasCtx.fillStyle = 'rgba(0,120,0,0.5)';
+    //         else
+    //             this.canvasCtx.fillStyle = 'rgba(0,0,120,0.5)';
+    //             this.canvasCtx.scale(1,1);
+    //             this.canvasCtx.fillRect(0,0, this.canvasElement.width, this.canvasElement.height);
+    //             this.canvasCtx.ellipse(this.canvasElement.width / 2, this.canvasElement.height / 2, 230, 300, 0, 0, Math.PI*2);
+    //             //this.canvasCtx.arc(this.canvasElement.width / 2, this.canvasElement.height / 2, 300, 0, Math.PI * 2, true);
+    //             this.canvasCtx.clip();
+    //             this.canvasCtx.scale(1,1);
+    //             this.canvasCtx.drawImage(canvas, 0, 0, this.canvasElement.width, this.canvasElement.height);
         
             
-        }
-    }
+    //     }
+    // }
 
     showNottinghamPoints(face){
         if(this.isShowNottinghamPoints)

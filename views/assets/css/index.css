@@ -18,7 +18,7 @@ body{
         position: absolute;
         top: 70;
         right: 30;
-        width: 48%;
+        width: 45%;
     }
 
     .title h1{
@@ -66,12 +66,96 @@ body{
     .right-me p, .left-me p{
         font-size: 35px;
     }
-
-
     
+    .m-modal{
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
+        position: fixed;
+        top: 0;
+        background-color: #fff;
+        margin: 10%;
 
+        border-radius: 35px;
 
+        box-shadow: 2px 5px 20px #000;
+        
+    }
+
+    .m-modal button{
+        background-color: #780FA9;
+        color: #fff;
+        border-radius: 25px;
+        width: 92%;
+        font-size: 50px;
+        padding: 15px;
+        margin: 4%;
+        
+    }
+
+    .m-modal-title{
+        display: flex;
+        flex-direction: column;
+        text-align: center;
+
+        font-size: 32pt;
+        margin-top: 8%;
+        font-weight: bold;
+        width: 100%;
+    }
+
+    .m-modal-content{
+        font-size: 25pt;
+        padding: 5%;
+        max-width: 95%;
+        word-wrap: break-word;
+    }
+
+    .m-modal-content p{
+        margin: 5%;
+    }
+
+    .m-modal-footer{
+        display: flex;
+        align-items: center;
+        flex-direction: row;
+    }
+
+    .m-modal-footer input[type=checkbox]
+    {
+      /* Double-sized Checkboxes */
+      -ms-transform: scale(3); /* IE */
+      -moz-transform: scale(3); /* FF */
+      -webkit-transform: scale(3); /* Safari and Chrome */
+      -o-transform: scale(3); /* Opera */
+      transform: scale(3);
+      padding: 3px;
+    }
+
+    .m-modal-subtitle{
+        font-weight: normal;
+    }
+
+    .m-modal-close-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        align-self: flex-end;
+        margin-right: 5%;
+
+        border-radius: 50%;
+        border: 1px solid #780FA9;
+        color: #780FA9;
+
+        min-width: 50px;
+        min-height: 50px;
+        max-width: 50px;
+        max-height: 50px;
+
+    }
 
 
 }
@@ -89,6 +173,8 @@ body{
     height: auto;
     width: 100%; 
   }
+
+
 }
 
 .thumb img {

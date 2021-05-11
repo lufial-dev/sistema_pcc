@@ -5,45 +5,43 @@ const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
 
-const buttonStart = document.getElementById('start-button');
-const buttonShowLandmarksPoints = document.getElementById('show-landmarks');
-const buttonShowNottinghamPoints = document.getElementById('show-points-nottingham');
+const buttonStart = document.getElementById('button-start-capture');
+// const buttonShowLandmarksPoints = document.getElementById('show-landmarks');
+// const buttonShowNottinghamPoints = document.getElementById('show-points-nottingham');
 const textInstruction = document.getElementById('instruction');
-const divResults = document.getElementById('results');
+// const divResults = document.getElementById('results');
 
 const appController = new AppController({
-    canvas : canvasCtx,
-    canvasElement : canvasElement,
-    textInstruction : textInstruction,
-    buttonShowLandmarksPoints: buttonShowLandmarksPoints,
-    buttonShowNottinghamPoints: buttonShowNottinghamPoints,
+     canvas : canvasCtx,
+     canvasElement : canvasElement,
+     textInstruction : textInstruction,
+    //  buttonShowLandmarksPoints: buttonShowLandmarksPoints,
+    //  buttonShowNottinghamPoints: buttonShowNottinghamPoints,
     buttonStart : buttonStart,
-    divResults : divResults,
+    //  divResults : divResults,
 });
 
-buttonShowLandmarksPoints.onclick = () => appController.setShowLandmarksPoints();
-buttonShowNottinghamPoints.onclick = () => appController.setShowNottinghamPoints();
+// buttonShowLandmarksPoints.onclick = () => appController.setShowLandmarksPoints();
+// buttonShowNottinghamPoints.onclick = () => appController.setShowNottinghamPoints();
 buttonStart.onclick = () => appController.start();
 
+  const faceMesh = new FaceMesh({locateFile: (file) => {
+    return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.3.1620080371/${file}`;
+  }});
 
+  faceMesh.setOptions({
+    maxNumFaces: 1,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5
+  });
 
-const faceMesh = new FaceMesh({locateFile: (file) => {
-  return `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh/${file}`;
-}});
-faceMesh.setOptions({
-  maxNumFaces: 1,
-  minDetectionConfidence: 0.5,
-  minTrackingConfidence: 0.5
-});
-
-
-faceMesh.onResults(results => appController.onResults(results));
-
-const camera = new Camera(videoElement, {
-  onFrame: async () => {
-    await faceMesh.send({image: videoElement});
-  },
-  width: 430,
-  height: 430
-});
-camera.start();
+  faceMesh.onResults( result => appController.onResults(result));
+  
+  const camera = new Camera(videoElement, {
+    onFrame: async () => {
+      await faceMesh.send({image: videoElement});
+    },
+    width: 400,
+    height: 400
+  });
+  camera.start();

@@ -11,46 +11,48 @@ class CaptureController{
         this.divResults = divResults;
     }
 
+    
+
     startCapture(canvas) {
         if(this.faces.length > 1){
             if(this.textInstruction.innerHTML==this.texts[0] && this.isStop()){
                 this.textInstruction.innerHTML = this.texts[1];
                 var image =canvas.toDataURL("image/png");
-                this.divResults.innerHTML = (
-                    "<div class='image'><p>Repouso</p>"+
-                    "<img src='"+image+"' alt='from canvas' width=100px/></div>"
-                );
+                // this.divResults.innerHTML = (
+                //     "<div class='image'><p>Repouso</p>"+
+                //     "<img src='"+image+"' alt='from canvas' width=100px/></div>"
+                // );
                 this.captures.push(new Capture({image:image , face: this.face}));
             }
             else if(this.textInstruction.innerHTML == this.texts[1]  && this.isEyebrown() && this.isStop()){
                 this.textInstruction.innerHTML = this.texts[2];
                 var image =canvas.toDataURL("image/png");
-                this.divResults.innerHTML = (
-                    this.divResults.innerHTML +
-                    "<div class='image'><p>Sobramcelhas erguidas</p>"+
-                    "<img src='"+image+"' alt='from canvas' width=100px/></div>"
-                );
+                // this.divResults.innerHTML = (
+                //     this.divResults.innerHTML +
+                //     "<div class='image'><p>Sobramcelhas erguidas</p>"+
+                //     "<img src='"+image+"' alt='from canvas' width=100px/></div>"
+                // );
                 this.captures.push(new Capture({image:image , face: this.face}));
             }
             else if(this.textInstruction.innerHTML == this.texts[2]  && this.isSmile() && this.isStop()){
                 this.textInstruction.innerHTML = this.texts[3];
                 var image =canvas.toDataURL("image/png");
-                this.divResults.innerHTML = (
-                    this.divResults.innerHTML +
-                    "<div class='image'><p>Sorrindo</p>"+
-                    "<img src='"+image+"' alt='from canvas' width=100px/></div>"
-                );
+                // this.divResults.innerHTML = (
+                //     this.divResults.innerHTML +
+                //     "<div class='image'><p>Sorrindo</p>"+
+                //     "<img src='"+image+"' alt='from canvas' width=100px/></div>"
+                // );
                 this.captures.push(new Capture({image:image , face: this.face}));
             }
                 
             else if(this.textInstruction.innerHTML == this.texts[3]  && this.isPressEyes()){
                 this.textInstruction.innerHTML = "CAPTURA CONCLUIDA";
                 var image =canvas.toDataURL("image/png");
-                this.divResults.innerHTML = (
-                    this.divResults.innerHTML +
-                    "<div class='image'><p>Precionando olhos</p>"+
-                    "<img src='"+image+"' alt='from canvas' width=100px/></div>"
-                );
+                // this.divResults.innerHTML = (
+                //     this.divResults.innerHTML +
+                //     "<div class='image'><p>Precionando olhos</p>"+
+                //     "<img src='"+image+"' alt='from canvas' width=100px/></div>"
+                // );
                 this.captures.push(new Capture({image:image , face: this.face}));
                 this.isCaptured = false;
             }
@@ -63,7 +65,8 @@ class CaptureController{
     isSmile(){
             var disSmileCapture = this.convertToPositive(this.captures[0].face.nottingham.comissuraLabialDir[0] - this.captures[0].face.nottingham.comissuraLabialEsq[0]);
             var disSmileFace = this.convertToPositive(this.face.nottingham.comissuraLabialDir[0] - this.face.nottingham.comissuraLabialEsq[0]);
-            if (this.convertToPositive(disSmileCapture - disSmileFace) > 8)
+            var percent = disSmileCapture*15/100;
+            if (this.convertToPositive(disSmileCapture - disSmileFace) > percent)
                 return true
             return false
     }
