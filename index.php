@@ -91,7 +91,7 @@
           
         </div>
         <div class="m-modal-content">
-          <a href="./captura.html">
+          <a href="./captura.php">
             <button class="button">
               Nottingham
             </button>

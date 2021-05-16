@@ -35,7 +35,7 @@ buttonStart.onclick = () => appController.start();
     minTrackingConfidence: 0.5
   });
 
-  faceMesh.onResults( result => appController.onResults(result));
+  
   
   const camera = new Camera(videoElement, {
     onFrame: async () => {
@@ -45,3 +45,5 @@ buttonStart.onclick = () => appController.start();
     height: 400
   });
   camera.start();
+  
+  faceMesh.onResults( result => appController.onResults(result, camera));

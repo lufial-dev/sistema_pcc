@@ -18,11 +18,12 @@ class AppController{
         this.position = 0;
         this.faces = [];
         this.isCenterFace = false;
+        this.isStart = false;
         this.texts = [
-            "CENTRALIZE SEU ROSTO E FIQUE EM POSIÇÃO DE REPOUSO",
-            "LEVANTE AS SOMBRANCELHAS",
-            "SORRIA",
-            "PRECIONE OS OLHOS COM FORÇA"
+            "Mantenha o rosto em repouso e evite movimentos bruscos",
+            "Levante as Sobrancelhas",
+            "Sorria",
+            "Precione os olhos com força"
         ];
         this.captureController = new CaptureController({face : this.face, textInstruction : this.textInstruction, texts : this.texts, faces : this.faces, buttonStart : buttonStart, divResults : divResults});
         
@@ -38,6 +39,10 @@ class AppController{
         this.captureController.captures = [];
         this.textInstruction.innerHTML = this.texts[0];
         this.captureController.isCaptured = true;
+        document.getElementById("button-start-capture").style.display = "none";
+        document.getElementById("status").style.display = "flex";
+        document.getElementById("menu-capture").style.display = "flex";
+        document.getElementById("roll").click();
         //this.isShowCenterFace = true;
     }
 
@@ -57,12 +62,17 @@ class AppController{
           this.buttonShowNottinghamPoints.innerHTML = "Mostrar Pontos de Nottingham";
     }
 
-    verifyCenter(){
+    verifyCenter(contorno, button){
         var contorno = document.getElementById("contorno-img");
         var button = document.getElementById("button-start-capture");
+        if(!this.isStart){
+            document.getElementById("load-camera").style.display = "none";
+            this.textInstruction.innerHTML = "Mantenha o roesto centralizado";
+            contorno.style.display = "block";
+            this.isStart = true;
+        }
         var posXDir = this.face.getXbyId(234);
         var posXEsq = this.face.getXbyId(454);
-        console.log(posXEsq);
         if(posXDir > 120 && posXDir < 220 && posXEsq > 480 && posXEsq < 560 ){
             contorno.src = "views/assets/images/contorno-verde.png";
             button.style.backgroundColor = "#780FA9";
@@ -76,10 +86,11 @@ class AppController{
 
     }
     
-    onResults(results) {
+    onResults(results, camera) {
         this.canvasCtx.save();
         this.flip();
         this.verifyCenter();
+
 
         this.canvasCtx.clearRect(0, 0, this.C, this.canvasElement.height);
         this.canvasCtx.drawImage(results.image, 0, 0, this.canvasElement.width, this.canvasElement.height);
@@ -98,7 +109,7 @@ class AppController{
             this.captureController.face = this.face;
             this.addFace();   
             if(this.captureController.isCaptured)
-                this.captureController.startCapture(results.image);
+                this.captureController.startCapture(results.image, camera);
 
             // for(const land of this.face.landmarks){
             //     this.canvasCtx.fillText(land.number, land.x, land.y);
@@ -106,6 +117,7 @@ class AppController{
             
             
             this.canvasCtx.restore();
+            
         }
         
     }

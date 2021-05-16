@@ -15,14 +15,15 @@
 </head>
 
 <body>
+  <a href="#content" id="roll"></a>
   <div class="container">
     <div class="top">
         Simetric Calc
     </div>
 
-    <div class="content">
+    <div class="content" id="content">
       <div class="legenda" id="instruction">
-        Mantenha o rosto centralizado. Evite movimentos bruscos.
+        Carregando a camera. Aguarde...
       </div>
 
       <!-- <div>
@@ -34,22 +35,74 @@
         
         <div class="canva-container">
           <canvas class="output_canvas" id="canva" width="680px" height="680px"></canvas>
+          <img id="load-camera" alt="Carregando Camera" src="views/assets/images/load-camera.gif"/>
+          <div id="load-dados">
+            <img alt="Carregando Dados" src="views/assets/images/carregando-informacoes.gif"/>
+            <h2>Carregando dados</h2>
+          </div>
           <img id="contorno-img" alt="Contorno" src="views/assets/images/contorno-vermelho.png"/>
+          
         </div>
 
+        <div class="menu-capture" id="menu-capture">
+          <img src="views/assets/images/icon-stop.png"/>
+          <img src="views/assets/images/icon-help.png"/>
+        </div>
+
+        <div class="menu-final" id="menu-final">
+          <a href="captura.php" id="button-new-capture" class="button">
+              Nova Captura
+          </a>
+          <button id="button-results" class="button" > 
+            Continuar
+          </button>
+        </div>
+          
+        
+        <div class="status" id="status">
+          <div class="status-img">
+            <img id="status-0" src="views/assets/images/user-load-0.png">
+            <h5>Repouso</h5>
+          </div>
+          <div class="status-img">
+            <img id="status-1" src="views/assets/images/user-load-0.png">
+            <h5>Sobrancelhas Erguidas</h5>
+          </div>
+          <div class="status-img">
+            <img id="status-2" src="views/assets/images/user-load-0.png">
+            <h5>Sorrindo</h5>
+          </div>
+          <div class="status-img">
+            <img id="status-3" src="views/assets/images/user-load-0.png">
+            <h5>Olhos precionados</h5>
+          </div>
+        </div>
+
+        <div class="results" id="results"></div>
         <button id="button-start-capture" class="button" disabled="disabled"> 
           Iniciar Captura
         </button>
 
-
         <video class="input_video"></video>
-        
-        <div class="results" id="results">
-        </div>
       
     </div>
+
+    
     
   </div>
+
+  <div class="m-modal" id="m-modal-load-data">
+        <div class="m-modal-title">
+          Todos os dados foram carreados.
+        </div>
+        <div class="m-modal-content">
+          <form method="post" action="resultados-nottingham.php">
+            <input type="hidden" name="data" id="input-data"/>
+            <input type="submit" class="button" value="Ver Resultados"> 
+              
+        </form>
+        </div>
+      </div>
 </body>
 </html>
 
@@ -58,3 +111,5 @@
 <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 <script src="./app.js" type="module"></script>
+
+
