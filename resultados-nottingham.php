@@ -1,6 +1,49 @@
 <?php
     $params = $_POST['data'];
     $array = json_decode($params, true);
+
+    $SO_IO_R_rep = 0;
+    $LC_M_R_rep = 0; 
+    $SO_IO_L_rep = 0;
+    $LC_M_L_rep = 0; 
+
+    $SO_IO_R_sob = 0;
+    $LC_M_R_sob = 0; 
+    $SO_IO_L_sob = 0;
+    $LC_M_L_sob = 0; 
+
+    $SO_IO_R_sor = 0;
+    $LC_M_R_sor = 0; 
+    $SO_IO_L_sor = 0;
+    $LC_M_L_sor = 0; 
+
+    $SO_IO_R_pre = 0;
+    $LC_M_R_pre = 0; 
+    $SO_IO_L_pre = 0;
+    $LC_M_L_pre = 0; 
+
+    function toPositive($num){
+      if($num < 0 )
+        $num *=-1;
+      return $num;
+    }
+
+    function calcDis($val1, $val2){
+      $soma = ($val1[0] - $val2[0])^2 + ($val1[1] - $val2[1])^2;
+      $distancia = 0;
+        
+        if (intval($soma) == 0){
+            $distancia = 0;
+        }else{
+            //echo "<script>alert($soma)</script>";
+            $distancia = sqrt(intval(toPositive($soma)));
+        }
+        return $distancia;
+    }
+
+    
+
+
 ?>
 
 <html>
@@ -36,6 +79,11 @@
             $cantoLateralDir = $item["face"]["nottingham"]["cantoLateralDir"];
             $comissuraLabialEsq = $item["face"]["nottingham"]["comissuraLabialEsq"];
             $comissuraLabialDir = $item["face"]["nottingham"]["comissuraLabialDir"];
+        
+            $SO_IO_R = 0;
+            $LC_M_R = 0; 
+            $SO_IO_L = 0;
+            $LC_M_L = 0; 
         ?>
 
         <div class="mySlides">
@@ -47,16 +95,67 @@
               <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
             </div>
 
+            <?php
+              if ($mimica == "Repouso"){
+                
+                $SO_IO_R_rep = calcDis($supraorbitalDir, $infraorbitalDir);
+                $SO_IO_L_rep = calcDis($supraorbitalEsq, $infraorbitalEsq);
+                $LC_M_R_rep = calcDis($cantoLateralDir, $comissuraLabialDir);
+                $LC_M_L_rep = calcDis($cantoLateralEsq, $comissuraLabialEsq);
+                
+                $SO_IO_R = $SO_IO_R_rep;
+                $SO_IO_L = $SO_IO_L_rep;
+                $LC_M_R = $LC_M_R_rep; 
+                $LC_M_L = $LC_M_L_rep;
+
+              }else if($mimica == "Sobrancelhas Erguidas"){
+
+                $SO_IO_R_sob = calcDis($supraorbitalDir, $infraorbitalDir);
+                $SO_IO_L_sob = calcDis($supraorbitalEsq, $infraorbitalEsq);
+                $LC_M_R_sob = calcDis($cantoLateralDir, $comissuraLabialDir);
+                $LC_M_L_sob = calcDis($cantoLateralEsq, $comissuraLabialEsq);
+                
+                $SO_IO_R = $SO_IO_R_sob;
+                $SO_IO_L = $SO_IO_L_sob;
+                $LC_M_R = $LC_M_R_sob; 
+                $LC_M_L = $LC_M_L_sob;
+              }else if($mimica == "Sorrindo"){
+
+                $SO_IO_R_sor = calcDis($supraorbitalDir, $infraorbitalDir);
+                $SO_IO_L_sor = calcDis($supraorbitalEsq, $infraorbitalEsq);
+                $LC_M_R_sor = calcDis($cantoLateralDir, $comissuraLabialDir);
+                $LC_M_L_sor = calcDis($cantoLateralEsq, $comissuraLabialEsq);
+                
+                $SO_IO_R = $SO_IO_R_sor;
+                $SO_IO_L = $SO_IO_L_sor;
+                $LC_M_R = $LC_M_R_sor; 
+                $LC_M_L = $LC_M_L_sor;
+              }else if($mimica == "Olhos Fechados"){
+
+                $SO_IO_R_pre = calcDis($supraorbitalDir, $infraorbitalDir);
+                $SO_IO_L_pre = calcDis($supraorbitalEsq, $infraorbitalEsq);
+                $LC_M_R_pre = calcDis($cantoLateralDir, $comissuraLabialDir);
+                $LC_M_L_pre = calcDis($cantoLateralEsq, $comissuraLabialEsq);
+                
+                $SO_IO_R = $SO_IO_R_pre;
+                $SO_IO_L = $SO_IO_L_pre;
+                $LC_M_R = $LC_M_R_pre; 
+                $LC_M_L = $LC_M_L_pre;
+              }
+
+              
+            ?>
+
             <div class="top-data-right">
               <div class='results'>
                 <h2>Lado Direito</h2>
                 <div>
                   <h1>SO para IO</h1>
-                  <h3>28 pontos</h3>
+                  <h3><?=number_format($SO_IO_R, 2, ',', ' ')." Pontos"?></h3>
                 </div>
                 <div>
-                  <h1>LC para IM</h1>
-                  <h3>44,2 pontos</h3>
+                  <h1>LC para M</h1>
+                  <h3><?=number_format($LC_M_R, 2, ',', ' ')." Pontos"?></h3>
                 </div>
               </div>  
 
@@ -66,11 +165,11 @@
                 <h2>Lado Esquerdo</h2>
                 <div>
                   <h1>SO para IO</h1>
-                  <h3>28 pontos</h3>
+                  <h3><?=number_format($SO_IO_L, 2, ',', ' ')." Pontos"?></h3>
                 </div>
                 <div>
                   <h1>LC para IM</h1>
-                  <h3>44,2 pontos</h3>
+                  <h3><?=number_format($LC_M_L, 2, ',', ' ')." Pontos"?></h3>
                 </div>
               </div>  
             </div>
@@ -80,12 +179,24 @@
             }
         ?>
 
+        <?php
+          $R = ($SO_IO_R_sob / $SO_IO_R_rep)  + ($SO_IO_R_pre / $SO_IO_R_rep ) + ($LC_M_R_sor / $LC_M_R_rep);
+          $L = ($SO_IO_L_sob / $SO_IO_L_rep)  + ($SO_IO_L_pre / $SO_IO_L_rep ) + ($LC_M_L_sor / $LC_M_L_rep);
+          $simetria = toPositive($R - $L) * 100;
+                
+        ?>
         
         <div class="total-simetric">
-          <h1>Simetria: 97%</h1>
+          <h1>Simetria: 
+            <?=number_format( 100 - $simetria, 2, ',', ' '). "%"?>
+          </h1>
         </div>
-      
+        <div class="footer-data">
+          <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+        </div>
       </div>
+
+      
     </div>
 
     
@@ -117,3 +228,41 @@ function showDivs(n) {
   x[slideIndex-1].style.display = "block";  
 }
 </script>
+
+
+
+<?php
+  echo "
+    <script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
+    <script type=\"text/javascript\">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['Year', 'Sales', 'Expenses', 'Profit'],
+          ['2014', 1000, 400, 200],
+          ['2015', 1170, 460, 250],
+          ['2016', 660, 1120, 300],
+          ['2017', 1030, 540, 350]
+        ]);
+
+        var options = {
+          width: 750,
+          chart: {
+            title: 'Company Performance',
+            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+          }
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  ";
+
+  ?>
+    
+  </body>
+</html>
