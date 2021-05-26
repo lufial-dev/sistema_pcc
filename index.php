@@ -91,14 +91,16 @@
           
         </div>
         <div class="m-modal-content">
-          <a href="./captura.php">
+          <a href="./captura.php?tecnica=nottingham">
             <button class="button">
               Nottingham
             </button>
           </a>
-          <button class="button">
-            House-Brackmann
-          </button>
+          <a href="./captura.php?tecnica=house-brackmann">
+            <button class="button">
+              House-Brackmann
+            </button>
+          </a>
           <button class="button">
             Razão Áurea
           </button>

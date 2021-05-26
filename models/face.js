@@ -1,10 +1,12 @@
 import Landmark from "./landmark.js";
 import Nottingham from "./nottingham.js";
+import ProporcaoRadial from "./proporcao-radial.js";
 
 class Face{
     constructor(){    
         this.landmarks = [];
         this.nottingham = new Nottingham();
+        this.radial = new ProporcaoRadial();
     }
     
     setLandmarks(landmarks, width, height){

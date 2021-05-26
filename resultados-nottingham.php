@@ -91,9 +91,9 @@
             <div class='top-data-left'>
               <h1><?=$mimica?></h1>
               <img src=<?=$image?>>
-              <button class="w3-button w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
-              <button class="w3-button w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
             </div>
+            <button class="w3-button w3-display-left" id="w3-display-left" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="w3-button w3-display-right" id="w3-display-right" onclick="plusDivs(+1)">&#10095;</button>
 
             <?php
               if ($mimica == "Repouso"){
@@ -192,7 +192,7 @@
           </h1>
         </div>
         <div class="footer-data">
-          <div id="columnchart_material" style="width: 800px; height: 500px;"></div>
+          <div id="columnchart_material"></div>
         </div>
       </div>
 
@@ -232,26 +232,28 @@ function showDivs(n) {
 
 
 <?php
-  echo "
-    <script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
+  echo
+    "<script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
     <script type=\"text/javascript\">
       google.charts.load('current', {'packages':['bar']});
       google.charts.setOnLoadCallback(drawChart);
 
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
-          ['Year', 'Sales', 'Expenses', 'Profit'],
-          ['2014', 1000, 400, 200],
-          ['2015', 1170, 460, 250],
-          ['2016', 660, 1120, 300],
-          ['2017', 1030, 540, 350]
+          ['Posiçao', 'Esquerdo', 'Direito'],
+          ['Repouso', $SO_IO_L_rep, $SO_IO_R_rep],
+          ['Sobrancelhas Erguidas', $SO_IO_L_sob, $SO_IO_R_sob],
+          ['Sorrindo', $LC_M_L_sor, $LC_M_R_sor],
+          ['Olhos Precionados', $SO_IO_L_pre, $SO_IO_R_pre],
         ]);
 
         var options = {
-          width: 750,
+          width: 800,
+          height: 550,
+          
           chart: {
-            title: 'Company Performance',
-            subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+            title: 'Simetric Calc - Simetria Facial',
+            subtitle: 'Escala de Nottingham',
           }
         };
 

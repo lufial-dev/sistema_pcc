@@ -23,7 +23,7 @@
 
         $capture = new Capture($image_name, $face, $item["mimica"]);
 
-        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images/' . $image_name, $data);
+        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images\\' . $image_name, $data);
         
         $capture->save($conn);
         $point = new Point( json_encode($item["face"]["landmarks"]), $capture);

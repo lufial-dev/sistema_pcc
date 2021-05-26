@@ -103,6 +103,8 @@ class AppController{
                 //this.showCenterFace(results.image);            
                 this.showLandmarksPoints(this.face.landmarks);
                 this.getNottinghamPositions(this.face);
+                this.getRadialPositions(this.face);
+                this.showRadialPoints(this.face);
                 this.showNottinghamPoints(this.face);  
                 
             }
@@ -160,6 +162,35 @@ class AppController{
     showNottinghamPoints(face){
         if(this.isShowNottinghamPoints)
             face.nottingham.drawPoints(this.canvasCtx);
+    }
+
+    showRadialPoints(face){
+        // if(this.isShowNottinghamPoints)
+            face.radial.drawPoints(this.canvasCtx);
+    }
+
+    getRadialPositions(face){
+        
+        face.radial.p1 = [face.getXbyId(33), face.getYbyId(33)];
+        face.radial.p2 = [face.getXbyId(263), face.getYbyId(263)];
+        face.radial.p3 = [face.getXbyId(154), face.getYbyId(154)];
+        face.radial.p4 = [face.getXbyId(398), face.getYbyId(398)];
+        face.radial.p5 = [face.getXbyId(127), face.getYbyId(127)];
+        face.radial.p6 = [face.getXbyId(356), face.getYbyId(356)];
+        face.radial.p7 = [face.getXbyId(49), face.getYbyId(49)];
+        face.radial.p8 = [face.getXbyId(1), face.getYbyId(1)];
+        face.radial.p9 = [face.getXbyId(279), face.getYbyId(279)];
+        face.radial.p10 = [face.getXbyId(58), face.getYbyId(58)];
+        face.radial.p11 = [face.getXbyId(61), face.getYbyId(61)];
+        face.radial.p12 = [face.getXbyId(291), face.getYbyId(291)];
+        face.radial.p13 = [face.getXbyId(288), face.getYbyId(288)];
+        face.radial.p14 = [face.getXbyId(176), face.getYbyId(176)];
+        face.radial.p15 = [face.getXbyId(400), face.getYbyId(400)];
+        face.radial.p16 = [face.getXbyId(9), face.getYbyId(9)];
+        face.radial.p17 = [face.getXbyId(152), face.getYbyId(152)];
+
+        face.radial.calcDis();
+
     }
 
     getNottinghamPositions(face){

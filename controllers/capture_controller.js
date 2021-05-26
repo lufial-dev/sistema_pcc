@@ -75,8 +75,7 @@ class CaptureController{
 
         xhr.onreadystatechange = () => {
             if(xhr.readyState == 4) { 
-                if(xhr.status == 200) {                   
-                    console.log(xhr.responseText);
+                if(xhr.status == 200) {              
                     this.loadCapture = false;
                     document.getElementById("load-dados").style.display = "none";
                     document.getElementById("m-modal-load-data").style.display="flex";

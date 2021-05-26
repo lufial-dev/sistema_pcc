@@ -91,12 +91,21 @@
     
   </div>
 
+  <?php
+    $tecnica = $_GET['tecnica'];
+    $url = "";
+    if($tecnica == "nottingham")
+      $url = "resultados-nottingham.php";
+    else if($tecnica == "proporcao-radial")
+      $url = "resultados-proporcao-radial.php";
+  ?>
+
   <div class="m-modal" id="m-modal-load-data">
         <div class="m-modal-title">
           Todos os dados foram carreados.
         </div>
         <div class="m-modal-content">
-          <form method="post" action="resultados-nottingham.php">
+          <form method="post" action="<?=$url?>">
             <input type="hidden" name="data" id="input-data"/>
             <input type="submit" class="button" value="Ver Resultados"> 
               
