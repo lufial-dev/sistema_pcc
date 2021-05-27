@@ -104,7 +104,9 @@ class AppController{
                 this.showLandmarksPoints(this.face.landmarks);
                 this.getNottinghamPositions(this.face);
                 this.getRadialPositions(this.face);
+                this.getAureaPositions(this.face);
                 this.showRadialPoints(this.face);
+                this.showAureaPoints(this.face);
                 this.showNottinghamPoints(this.face);  
                 
             }
@@ -165,8 +167,30 @@ class AppController{
     }
 
     showRadialPoints(face){
-        // if(this.isShowNottinghamPoints)
+        if(this.isShowNottinghamPoints)
             face.radial.drawPoints(this.canvasCtx);
+    }
+
+    showAureaPoints(face){
+        //if(this.isShowNottinghamPoints)
+            face.aurea.drawPoints(this.canvasCtx);
+    }
+
+    getAureaPositions(face){
+        face.aurea.cantoBocaDir = [face.getXbyId(61), face.getYbyId(61)];
+        face.aurea.cantoBocaEsq = [face.getXbyId(291), face.getYbyId(291)];
+        face.aurea.olhoDir = [face.getXbyId(23), face.getYbyId(23)];
+        face.aurea.olhoEsq = [face.getXbyId(253), face.getYbyId(253)];
+        face.aurea.queixo = [face.getXbyId(152), face.getYbyId(152)];
+        face.aurea.baseNariz = [face.getXbyId(2), face.getYbyId(2)];
+        face.aurea.cabelo = [face.getXbyId(10), face.getYbyId(10)];
+        face.aurea.narizEsq = [face.getXbyId(49), face.getYbyId(49)];
+        face.aurea.narizDir = [face.getXbyId(279), face.getYbyId(279)];
+        face.aurea.temporaEsq = [face.getXbyId(368), face.getYbyId(368)];
+        face.aurea.temporaDir = [face.getXbyId(139), face.getYbyId(139)];
+        face.aurea.cantoOlhoDir = [face.getXbyId(33), face.getYbyId(33)];
+        face.aurea.cantoOlhoEsq = [face.getXbyId(263), face.getYbyId(263)];
+        
     }
 
     getRadialPositions(face){
@@ -188,7 +212,7 @@ class AppController{
         face.radial.p15 = [face.getXbyId(400), face.getYbyId(400)];
         face.radial.p16 = [face.getXbyId(9), face.getYbyId(9)];
         face.radial.p17 = [face.getXbyId(152), face.getYbyId(152)];
-
+        
         face.radial.calcDis();
 
     }

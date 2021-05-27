@@ -129,8 +129,19 @@
     color: #039800;
 }
 
+.buttons-w3{
+    display: flex;
+    flex-direction: row;
+    width: 400px;
+    justify-content: space-between;
+    width: 400px;
+    align-items: center;
+    position: absolute;
+    top: 350px;
+    margin-left: -30px;
+}
 
-#w3-display-left{
+/* #w3-display-left{
     position: absolute;
     top:380px;
     left: 6%;
@@ -140,6 +151,6 @@
     position: absolute;
     top:380px;
     left: 40%;
-}
+} */
 
 /*slide*/

@@ -98,6 +98,8 @@
       $url = "resultados-nottingham.php";
     else if($tecnica == "proporcao-radial")
       $url = "resultados-proporcao-radial.php";
+    else if($tecnica == "razao-aurea")
+      $url = "resultados-razao-aurea.php";
   ?>
 
   <div class="m-modal" id="m-modal-load-data">

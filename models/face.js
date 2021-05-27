@@ -1,12 +1,14 @@
 import Landmark from "./landmark.js";
 import Nottingham from "./nottingham.js";
 import ProporcaoRadial from "./proporcao-radial.js";
+import RazaoAurea from "./razao-aurea.js";
 
 class Face{
     constructor(){    
         this.landmarks = [];
         this.nottingham = new Nottingham();
         this.radial = new ProporcaoRadial();
+        this.aurea = new RazaoAurea();
     }
     
     setLandmarks(landmarks, width, height){
