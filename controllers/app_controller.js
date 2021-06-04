@@ -92,7 +92,7 @@ class AppController{
         this.verifyCenter();
 
 
-        this.canvasCtx.clearRect(0, 0, this.C, this.canvasElement.height);
+        this.canvasCtx.clearRect(0, 0,this.canvasElement.width, this.canvasElement.height);
         this.canvasCtx.drawImage(results.image, 0, 0, this.canvasElement.width, this.canvasElement.height);
         if (results.multiFaceLandmarks) {
         
@@ -105,9 +105,11 @@ class AppController{
                 this.getNottinghamPositions(this.face);
                 this.getRadialPositions(this.face);
                 this.getAureaPositions(this.face);
+                this.getAVCPositions(this.face);
                 this.showRadialPoints(this.face);
                 this.showAureaPoints(this.face);
                 this.showNottinghamPoints(this.face);  
+                this.showAVCPoints(this.face);  
                 
             }
             this.captureController.face = this.face;
@@ -115,10 +117,9 @@ class AppController{
             if(this.captureController.isCaptured)
                 this.captureController.startCapture(results.image, camera);
 
-            // for(const land of this.face.landmarks){
-            //     this.canvasCtx.fillText(land.number, land.x, land.y);
-            // }
-            
+            for(const land of this.face.landmarks){
+                this.canvasCtx.fillText(land.number, land.x, land.y);
+            }
             
             this.canvasCtx.restore();
             
@@ -172,8 +173,13 @@ class AppController{
     }
 
     showAureaPoints(face){
-        //if(this.isShowNottinghamPoints)
+        if(this.isShowNottinghamPoints)
             face.aurea.drawPoints(this.canvasCtx);
+    }
+
+    showAVCPoints(face){
+        //if(this.isShowNottinghamPoints)
+            face.avc.drawPoints(this.canvasCtx);
     }
 
     getAureaPositions(face){
@@ -190,6 +196,43 @@ class AppController{
         face.aurea.temporaDir = [face.getXbyId(139), face.getYbyId(139)];
         face.aurea.cantoOlhoDir = [face.getXbyId(33), face.getYbyId(33)];
         face.aurea.cantoOlhoEsq = [face.getXbyId(263), face.getYbyId(263)];
+        
+    }
+    convertToPositive(number){
+        if (number < 0)
+            return number * -1
+        return number
+
+    }
+    calcDis( val1, val2, control){
+        const soma = this.convertToPositive(val1[0] - val2[0])^2 + (val1[1] - val2[1])^2;
+        let distancia = 0;
+        
+        if (parseInt(soma) == 0){
+            distancia = 0;
+        }else{
+            distancia = Math.sqrt(parseInt(soma));
+            if(Number.isNaN(distancia))
+                distancia = control
+        }
+        return distancia;
+
+    }
+
+    getAVCPositions(face){
+        face.avc.sobrancelhaDir = [face.getXbyId(105), face.getYbyId(105)];
+        face.avc.sobrancelhaEsq = [face.getXbyId(334), face.getYbyId(334)];
+        face.avc.testaDir = [face.getXbyId(103), face.getYbyId(103)];
+        face.avc.testaEsq = [face.getXbyId(332), face.getYbyId(332)];
+        if(
+            this.convertToPositive(this.calcDis( face.avc.sobrancelhaDir, face.avc.testaDir, 1000 )
+            -
+            this.calcDis( face.avc.sobrancelhaEsq, face.avc.testaEsq, 1000 ))
+        >1.5){
+        console.log(
+            "foi"
+            );
+        }
         
     }
 

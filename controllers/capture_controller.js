@@ -74,6 +74,7 @@ class CaptureController{
         xhr.send("capture="+JSON.stringify(this.captures));
 
         xhr.onreadystatechange = () => {
+            console.log(xhr.responseText);
             if(xhr.readyState == 4) { 
                 if(xhr.status == 200) {              
                     this.loadCapture = false;

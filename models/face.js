@@ -1,3 +1,4 @@
+import AVC from "./avc.js";
 import Landmark from "./landmark.js";
 import Nottingham from "./nottingham.js";
 import ProporcaoRadial from "./proporcao-radial.js";
@@ -9,6 +10,7 @@ class Face{
         this.nottingham = new Nottingham();
         this.radial = new ProporcaoRadial();
         this.aurea = new RazaoAurea();
+        this.avc = new AVC();
     }
     
     setLandmarks(landmarks, width, height){

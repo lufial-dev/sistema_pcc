@@ -62,18 +62,26 @@
         <div class="status" id="status">
           <div class="status-img">
             <img id="status-0" src="views/assets/images/user-load-0.png">
+            <img id="status150-0" src="" width="150px" height="150px" style="display:none">
+            <img id="status50-0" src="" width="50px" height="50px" style="display:none">
             <h5>Repouso</h5>
           </div>
           <div class="status-img">
             <img id="status-1" src="views/assets/images/user-load-0.png">
+            <img id="status150-1" src="" width="150px" height="150px" style="display:none">
+            <img id="status50-1" src="" width="50px" height="50px" style="display:none">
             <h5>Sobrancelhas Erguidas</h5>
           </div>
           <div class="status-img">
             <img id="status-2" src="views/assets/images/user-load-0.png">
+            <img id="status150-2" src="" width="150px" height="150px" style="display:none">
+            <img id="status50-2" src="" width="50px" height="50px" style="display:none">
             <h5>Sorrindo</h5>
           </div>
           <div class="status-img">
             <img id="status-3" src="views/assets/images/user-load-0.png">
+            <img id="status150-3" src="" width="150px" height="150px" style="display:none">
+            <img id="status50-3" src="" width="50px" height="50px" style="display:none">
             <h5>Olhos precionados</h5>
           </div>
         </div>
@@ -82,7 +90,7 @@
         <button id="button-start-capture" class="button" disabled="disabled"> 
           Iniciar Captura
         </button>
-
+        <!-- <img class="input_video_2" src="./service/images/228-Repouso-04-06-2021-02-06-15-749002.png" width= "400px"/> -->
         <video class="input_video"></video>
       
     </div>

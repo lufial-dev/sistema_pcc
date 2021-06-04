@@ -1,6 +1,7 @@
 import AppController from './controllers/app_controller.js';
 
 const videoElement = document.getElementsByClassName('input_video')[0];
+const videoElement2 = document.getElementsByClassName('input_video_2')[0];
 const canvasElement = document.getElementsByClassName('output_canvas')[0];
 const canvasCtx = canvasElement.getContext('2d');
 
@@ -41,8 +42,8 @@ buttonStart.onclick = () => appController.start();
     onFrame: async () => {
       await faceMesh.send({image: videoElement});
     },
-    width: 400,
-    height: 400
+    width: 300,
+    height: 300
   });
   camera.start();
   

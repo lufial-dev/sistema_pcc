@@ -3,6 +3,7 @@
     require("model/capture.php");
     require("model/face.php");
     require("model/point.php");
+    require("./imageResize.php");
 
     $params = $_POST['capture'];
     $array = json_decode($params, true);
@@ -23,13 +24,19 @@
 
         $capture = new Capture($image_name, $face, $item["mimica"]);
 
-        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images\\' . $image_name, $data);
-        
+        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images\300\\' . $image_name, $data);
+        $image = ImageResize::createFromString($data);
+        $image->scale(50);
+        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images\150\\' . $image_name, $image);
+        $image = ImageResize::createFromString($data);
+        $image->scale(16.7);
+        file_put_contents('C:\xampp\htdocs\sistema_pcc\service\images\50\\' . $image_name, $image);
+       
         $capture->save($conn);
         $point = new Point( json_encode($item["face"]["landmarks"]), $capture);
         $point->save($conn);
 
     }
-    echo("Sucesso")
+    echo("Sucesso");
 ?>
 
