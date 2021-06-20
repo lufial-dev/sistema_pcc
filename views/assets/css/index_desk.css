@@ -1,29 +1,21 @@
-body{
-    font-family: 'Roboto';
-}
-@media only screen and (max-width: 1000px) {
-    .thumb {
-        position: relative;
-        max-width: 100%;
-        height: 900px;  
-        overflow: hidden;
-        border: 1px solid #000;
+
+@media only screen and (min-width: 1000px) {
+    .thumb{
+        width: 100vw;
+        height: 90vh;
     }
-    .thumb img {
+
+    .thumb img{
+        width: 100%;
         height: 100%;
-        width: auto;
-        position: absolute;
-        left: 50%;
-        top: 50%;
-        -webkit-transform: translate(-50%,-50%);
-        -ms-transform: translate(-50%,-50%);
-            transform: translate(-50%,-50%); 
+        object-fit: cover;
+        object-position: left;
     }
 
     .title{
         position: absolute;
-        top: 70;
-        right: 30;
+        top: 30;
+        right: 0;
         width: 45%;
     }
 
@@ -34,25 +26,28 @@ body{
     }
 
     .title h2{
-        font-size: 80px;
-        margin-top: 160px;
+        font-size: 40pt;
+        margin-top: 50px;
         font-weight: bold;
     }
 
+    
     .title button{
-        width: 90%;
-        font-size: 50px;
+        width: 50%;
+        margin-left: 20%;
+        font-size: 20pt;
         padding: 15px;
         background-color: #780FA9;
         color: #fff;
         border-radius: 25px;
         
     }
-    
+
     .content h3{
         font-weight: bold;
         font-size: 50px;
-        margin-top: 50px;
+        margin-top: 10px;
+        text-align: center;
 
     }
 
@@ -64,9 +59,11 @@ body{
     }
 
     .left-me img, .right-me img{
-        width: 90%;
+        width: 80%;
         
     }
+
+    
 
     .right-me, .left-me{
         width: 100%;
@@ -77,7 +74,7 @@ body{
     .right-me p, .left-me p{
         font-size: 35px;
     }
-    
+
     .m-modal{
         display: none;
         flex-direction: column;
@@ -87,7 +84,10 @@ body{
         position: fixed;
         top: 0;
         background-color: #fff;
-        margin: 10%;
+        margin-top: 10vh;
+
+        width: 70vw;
+        height: 80vh;
 
         border-radius: 35px;
 
@@ -95,14 +95,27 @@ body{
         
     }
 
+    #m-modal-login{
+        margin-top: 20vh;
+        height: 60vh !important;
+        width: 30vw;
+    }
+
+    #m-modal-registro{
+        margin-top: 5vh;
+        width: 30vw;
+        height: 90vh;
+    }
+
     .m-modal button{
         background-color: #780FA9;
         color: #fff;
-        border-radius: 25px;
-        width: 92%;
-        font-size: 50px;
+        border-radius: 10px;
+        width: 80%;
+        height: 50px;
         padding: 15px;
-        margin: 4%;
+        margin-left: 10%;
+        margin-top: 3%;
         
     }
 
@@ -110,15 +123,11 @@ body{
         display: flex;
         flex-direction: column;
         text-align: center;
-
-        font-size: 32pt;
-        margin-top: 8%;
         font-weight: bold;
         width: 100%;
     }
 
     .m-modal-content{
-        font-size: 25pt;
         padding: 5%;
         max-width: 95%;
         word-wrap: break-word;
@@ -132,17 +141,6 @@ body{
         display: flex;
         align-items: center;
         flex-direction: row;
-    }
-
-    .m-modal-footer input[type=checkbox]
-    {
-      /* Double-sized Checkboxes */
-      -ms-transform: scale(3); /* IE */
-      -moz-transform: scale(3); /* FF */
-      -webkit-transform: scale(3); /* Safari and Chrome */
-      -o-transform: scale(3); /* Opera */
-      transform: scale(3);
-      padding: 3px;
     }
 
     .m-modal-subtitle{
@@ -168,6 +166,29 @@ body{
 
     }
 
+    .m-modal-subtitle{
+        font-weight: normal;
+    }
+
+    .m-modal-close-button{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        align-self: flex-end;
+        margin-right: 5%;
+
+        border-radius: 50%;
+        border: 1px solid #780FA9;
+        color: #780FA9;
+
+        min-width: 25px;
+        min-height: 25px;
+        max-width: 25px;
+        max-height: 25px;
+
+    }
+
     
     .thumb img.portrait {
         width: 100%;
@@ -181,9 +202,29 @@ body{
         flex-direction: column;
     }
 
+    
+.m-alert-success{
+    background-color: green;
+  }
+  
+  .m-alert-error{
+    background-color: red;
+  }
+  
+  #alert{
+    position: absolute;
+    top: 80;
+    right: 50;
+  
+    display: none;
+  
+    color: #fff;
+    font-size: 12pt;
+  
+    z-index: 1040;
+  
+    box-shadow: 2px 2px 2px #000;
+  }
 
 
 }
-
-
-
